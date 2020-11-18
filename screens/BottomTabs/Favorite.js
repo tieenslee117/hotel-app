@@ -89,16 +89,12 @@ function Main({ navigation }) {
 }
 export default function Favorite() {
   return (
-    <Stack.Navigator headerMode="none">
-      <Stack.Screen
-        name="Favorite"
-        component={Main}
-        // options={{ headerShown: false }}
-      />
+    <Stack.Navigator>
+      <Stack.Screen name="Favorite" component={Main} options={{}} />
       <Stack.Screen
         name="Detail"
         component={Detail}
-        // options={{ headerShown: false }}
+        options={{ headerTransparent: true, headerTitle: "" }}
       />
     </Stack.Navigator>
   );

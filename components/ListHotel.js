@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     width: "100%",
-    color: "#ff5555",
+    color: "#ff383b",
   },
   ratingArea: {
     flexDirection: "row",

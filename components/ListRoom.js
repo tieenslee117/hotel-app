@@ -12,9 +12,9 @@ import {
 import formatPrice from "../helpers/format-price";
 // import rateFromNum from "../helpers/rate-from-num";
 export default function ListRoom({ list, navigation }) {
-  const handleNavigateDetail = (item) => {
-    navigation.navigate("Detail", { item: item });
-  };
+  // const handleNavigateDetail = (item) => {
+  //   navigation.navigate("Detail", { item: item });
+  // };
   return (
     <View style={styles.container}>
       <FlatList
@@ -24,7 +24,7 @@ export default function ListRoom({ list, navigation }) {
           <TouchableHighlight
             onPress={() => {
               console.log(item);
-              handleNavigateDetail(item);
+              // handleNavigateDetail(item);
             }}
           >
             <View style={styles.card}>
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     // padding: 10,
     margin: 15,
     marginBottom: 0,
-    height: 150,
+    height: 140,
   },
   name: {
     fontSize: 20,
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     width: "100%",
-    color: "#ff5555",
+    color: "#ff383b",
   },
   ratingArea: {
     flexDirection: "row",
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   },
   infoTop: {
     flex: 0.8,
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     marginLeft: 5,
     alignSelf: "flex-start",
   },

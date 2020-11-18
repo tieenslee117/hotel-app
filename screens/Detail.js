@@ -5,11 +5,52 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import rateFromNum from "../helpers/rate-from-num";
 import formatPrice from "../helpers/format-price";
 
-import ListHotel from "../components/ListRoom";
+import ListRoom from "../components/ListRoom";
 
 export default function Detail({ route, navigation }) {
   const [listRoom, setListRoom] = useState([]);
-
+  const list = [
+    {
+      name: "Khach san thu 1",
+      image: "https://i.imgur.com/8L4AiK9.jpgc",
+      price: 800000,
+    },
+    {
+      name: "Khach san thu 2",
+      image: "https://i.imgur.com/bz66PYo.jpg",
+      price: 900000,
+    },
+    {
+      name: "Khach san thu 3",
+      image: "https://i.imgur.com/S5VOZNm.jpg",
+      price: 1000000,
+    },
+    {
+      name: "Khach san thu 4",
+      image: "https://i.imgur.com/IZSMJvT.jpg",
+      price: 1200000,
+    },
+    {
+      name: "Khach san thu 5",
+      image: "https://i.imgur.com/1MdWiBF.jpg",
+      price: 1250000,
+    },
+    {
+      name: "Khach san thu 6",
+      image: "https://i.imgur.com/M9Q7bzz.jpg",
+      price: 690000,
+    },
+    {
+      name: "Khach san thu 7",
+      image: "https://i.imgur.com/xFNYwtT.jpg",
+      price: 1300000,
+    },
+    {
+      name: "Khach san thu 8",
+      image: "https://i.imgur.com/lQY3Ma9.jpg",
+      price: 1000000000,
+    },
+  ];
   const showStar = (n) => {
     let stars = [];
     let i = 0;
@@ -44,7 +85,7 @@ export default function Detail({ route, navigation }) {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
-        {/* <View style={styles.imageContainer}>
+        <View style={styles.imageContainer}>
           <Image
             resizeMode="cover"
             style={styles.image}
@@ -58,9 +99,9 @@ export default function Detail({ route, navigation }) {
             This is a description of hotel, it is very very very very very very
             long
           </Text>
-        </View> */}
+        </View>
         <View style={styles.mainContainer}>
-          {/* <View style={styles.content}>
+          <View style={styles.content}>
             <Text style={styles.label}>Đánh giá và xếp hạng</Text>
             <View style={styles.ratingContainer}>
               <View style={styles.ratingLeft}>
@@ -142,12 +183,25 @@ export default function Detail({ route, navigation }) {
               />
               <Text style={styles.locationText}>{pos}</Text>
             </View>
-          </View> */}
+          </View>
+          <View style={styles.content}>
+            <Text style={styles.label}>Thời gian</Text>
+            <View style={styles.timeContainer}>
+              <View style={styles.time}>
+                <Text style={styles.timeLabel}>Check-in</Text>
+                <Text style={styles.timeVal}>6:00</Text>
+              </View>
+              <View style={styles.time}>
+                <Text style={styles.timeLabel}>Check-out</Text>
+                <Text style={styles.timeVal}>18:00</Text>
+              </View>
+            </View>
+          </View>
           <View style={styles.content}>
             <Text style={styles.label}>Phòng của khách sạn</Text>
             <View style={styles.roomContainer}>
               <View style={styles.rooms}>
-                <ListHotel list={listRoom} navigation={navigation} />
+                <ListRoom list={list} navigation={navigation} />
               </View>
             </View>
           </View>
@@ -194,7 +248,7 @@ const styles = StyleSheet.create({
   },
   label: {
     marginBottom: 10,
-    fontSize: 15,
+    fontSize: 20,
     fontWeight: "bold",
   },
   name: {
@@ -212,7 +266,7 @@ const styles = StyleSheet.create({
   ratingContainer: {
     // height: 80,
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignContent: "center",
   },
   rating: {},
@@ -258,6 +312,22 @@ const styles = StyleSheet.create({
   locationText: {
     fontSize: 18,
     fontWeight: "500",
+  },
+  timeContainer: {
+    flexDirection: "row",
+  },
+  time: {
+    flex: 0.5,
+    alignItems: "flex-start",
+    justifyContent: "center",
+  },
+  timeLabel: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  timeVal: {
+    fontSize: 15,
+    color: "#666",
   },
   roomContainer: {},
   rooms: {},
