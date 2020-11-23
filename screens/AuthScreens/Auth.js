@@ -1,16 +1,6 @@
 import React from "react";
 // import * as Facebook from "expo-facebook";
-import {
-  Keyboard,
-  Text,
-  View,
-  TextInput,
-  TouchableWithoutFeedback,
-  Alert,
-  KeyboardAvoidingView,
-  StyleSheet,
-  AsyncStorage,
-} from "react-native";
+import { StyleSheet } from "react-native";
 import { Button } from "react-native-elements";
 // import { appId } from "../../config/key";
 import { NavigationContainer } from "@react-navigation/native";

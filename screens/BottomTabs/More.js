@@ -6,8 +6,12 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
-export default function More() {
-  return (
+import Auth from "../AuthScreens/Auth";
+
+export default function More({ navigation }) {
+  const isLogined = false;
+
+  return isLogined ? (
     <View style={styles.container}>
       <View style={styles.navBar}>
         {/* <Text style={styles.title}> Profile </Text> */}
@@ -63,6 +67,10 @@ export default function More() {
           </View>
         </View>
       </ScrollView>
+    </View>
+  ) : (
+    <View>
+      <Auth navigation={navigation} />
     </View>
   );
 }

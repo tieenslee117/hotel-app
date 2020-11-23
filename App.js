@@ -10,7 +10,7 @@ import HomeScreen from "./screens/BottomTabs/Home";
 import FavoriteScreen from "./screens/BottomTabs/Favorite";
 import MoreScreen from "./screens/BottomTabs/More";
 
-// import AuthScreen from "./screens/AuthScreens/Auth";
+import AuthScreen from "./screens/AuthScreens/Auth";
 
 const Tab = createBottomTabNavigator();
 
@@ -53,7 +53,7 @@ export default function App() {
         screenOptions={screenOptions}
         tabBarOptions={tabBarOptions}
       >
-        {/* <Tab.Screen component={AuthScreen} name="Auth" /> */}
+        <Tab.Screen component={AuthScreen} name="Auth" />
         <Tab.Screen component={HomeScreen} name="Home" />
         <Tab.Screen component={FavoriteScreen} name="Favorite" />
         <Tab.Screen component={MoreScreen} name="More" />

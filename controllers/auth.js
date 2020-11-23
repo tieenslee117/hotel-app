@@ -1,6 +1,7 @@
 import * as Facebook from "expo-facebook";
 import { APP_ID } from "../constants/key";
 import { Alert } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { auth } from "../config/firebase";
 export const login = () => {
   //TODO : LOGIN LOGIC
@@ -40,13 +41,13 @@ export const fbLogin = async () => {
 
       Alert.alert("Logged in!", `Hi ${await response.json()}!`);
     } else {
-      // type === 'cancel'
+      type === "cancel";
     }
+    AsyncStorage.setItem("@token", token);
   } catch ({ message }) {
     alert(`Facebook Login Error: ${message}`);
   }
 
-  // AsyncStorage.setItem('@token', token)
   // if (type === "success") {
   //   const response = await fetch(
   //     `https://graph.facebook.com/me?access_token=${token}`
