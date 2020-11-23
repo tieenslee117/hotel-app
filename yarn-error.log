@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\PC\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add axios
+  C:\Program Files\nodejs\node.exe C:\Users\PC\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add react-native-fbsdk --save
 
 PATH: 
   C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\PC\bin;C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\dotnet;C:\Program Files\Git\cmd;C:\MinGW\bin;C:\Program Files\Java\jdk-14\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files\nodejs;C:\Go\bin;C:\Program Files\apache-maven-3.6.3\bin;C:\Program Files\PostgreSQL\12\bin;C:\Program Files\Redis;C:\Program Files\MySQL\MySQL Shell 8.0\bin;C:\Ruby27-x64\bin;C:\Users\PC\AppData\Local\Programs\Python\Python37\Scripts;C:\Users\PC\AppData\Local\Programs\Python\Python37;C:\Users\PC\AppData\Local\Microsoft\WindowsApps;C:\Users\PC\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\PC\.dotnet\tools;C:\php;C:\Users\PC\AppData\Local\Microsoft\WindowsApps;C:\Users\PC\AppData\Local\atom\bin;C:\Users\PC\AppData\Local\GitHubDesktop\bin;C:\Program Files\JetBrains\PyCharm Community Edition 2019.2.5\bin;C:\Program Files\heroku\bin;C:\Users\PC\AppData\Local\hyper\app-3.0.2\resources\bin;C:\Exercism;C:\Users\PC\AppData\Roaming\npm;C:\Users\PC\go\bin;C:\Program Files\MongoDB\Server\4.2\bin;C:\flutter\bin;C:\Program Files\apache-maven-3.6.3\bin;C:\Program Files\JetBrains\DataGrip 2020.2.3\bin;C:\Program Files\Apache Software Foundation\Tomcat 9.0\bin
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: EPERM: operation not permitted, unlink 'C:\Users\PC\Documents\Tripi-Project\testt\node_modules\react-native-vector-icons\android'
+  Error: EPERM: operation not permitted, unlink 'C:\Users\PC\Documents\Tripi-Project\testt\node_modules\axios\dist'
 
 npm manifest: 
   {
@@ -48,7 +48,8 @@ npm manifest:
     "devDependencies": {
       "@babel/core": "~7.9.0"
     },
-    "private": true
+    "private": true,
+    "proxy" : "https://tripgle.data.tripi.vn/get_price"
   }
 
 yarn manifest: 

@@ -37,7 +37,14 @@ export default function ListHotel({ list, navigation }) {
     // return <View>{/* {for(let i = 0)} */}</View>;
     return stars;
   };
+  const getToday = () => {
+    let today = new Date();
+    const dd = String(today.getDate()).padStart(2, "0");
+    const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    const yyyy = today.getFullYear();
 
+    today = mm + "/" + dd + "/" + yyyy;
+  };
   const handleNavigateDetail = (item) => {
     navigation.navigate("Detail", { item: item });
   };
@@ -62,20 +69,20 @@ export default function ListHotel({ list, navigation }) {
                   <Text style={styles.name}>{item.name}</Text>
 
                   <View style={styles.star}>{showStar(item.star)}</View>
-                  <View style={styles.pos}>
+                  <View style={styles.address}>
                     <MaterialCommunityIcons
                       name="map-marker"
-                      color="#ddd"
+                      color="#4477AA"
                       size={20}
                     />
-                    <Text style={styles.posText}>{item.pos}</Text>
+                    <Text style={styles.addressText}>{item.address}</Text>
                   </View>
-                  <View style={styles.ratingArea}>
-                    <View style={styles.ratingDiv}>
-                      <Text style={styles.ratingNum}>{item.rating}</Text>
+                  <View style={styles.scoreArea}>
+                    <View style={styles.scoreDiv}>
+                      <Text style={styles.scoreNum}>{item.score / 10}</Text>
                     </View>
-                    <Text style={styles.ratingText}>
-                      {rateFromNum(item.rating)}
+                    <Text style={styles.scoreText}>
+                      {rateFromNum(item.score)}
                     </Text>
                   </View>
                   <Text style={styles.reviews}>
@@ -83,7 +90,7 @@ export default function ListHotel({ list, navigation }) {
                   </Text>
                 </View>
                 <View>
-                  <Text style={styles.price}>{formatPrice(item.price)}đ</Text>
+                  <Text style={styles.price}>{item.price}đ</Text>
                 </View>
               </View>
             </View>
@@ -113,11 +120,12 @@ const styles = StyleSheet.create({
     // padding: 10,
     margin: 15,
     marginBottom: 0,
-    height: 200,
+    height: 220,
   },
   name: {
     fontSize: 20,
     fontWeight: "bold",
+    color: "#cc3377",
   },
   image: {
     width: 120,
@@ -133,18 +141,20 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   infoWithoutPrice: {
-    flex: 0.8,
-    justifyContent: "space-around",
-    marginLeft: 5,
+    // backgroundColor: "blue",
+    flex: 0.9,
+    justifyContent: "space-between",
+    marginRight: 5,
     alignSelf: "flex-start",
   },
-  pos: {
+  address: {
     // flex: 1,
     flexDirection: "row",
     alignItems: "center",
   },
-  posText: {
+  addressText: {
     fontWeight: "600",
+    color: "#4477AA",
   },
   price: {
     fontSize: 20,
@@ -152,22 +162,22 @@ const styles = StyleSheet.create({
     width: "100%",
     color: "#ff383b",
   },
-  ratingArea: {
+  scoreArea: {
     flexDirection: "row",
     alignItems: "center",
   },
-  ratingDiv: {
+  scoreDiv: {
     backgroundColor: "#66aa33",
     // width: "100%",
     borderRadius: 5,
     padding: 5,
   },
-  ratingNum: {
+  scoreNum: {
     color: "#fff",
     fontSize: 15,
     fontWeight: "bold",
   },
-  ratingText: {
+  scoreText: {
     marginLeft: 10,
     fontWeight: "bold",
   },

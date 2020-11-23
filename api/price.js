@@ -1,5 +1,4 @@
 import { PRICE_API_URL, TOKEN } from "../constants/key.js";
-import axios from "axios";
 //pattern : {domain_id}_{domain_hotel_id}_{checkin_date_id}
 /**
  * @param {string} data

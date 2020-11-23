@@ -11,42 +11,42 @@ export default function Detail({ route, navigation }) {
   const [listRoom, setListRoom] = useState([]);
   const list = [
     {
-      name: "Khach san thu 1",
+      name: "Phong thu 1",
       image: "https://i.imgur.com/8L4AiK9.jpgc",
       price: 800000,
     },
     {
-      name: "Khach san thu 2",
+      name: "Phong thu 2",
       image: "https://i.imgur.com/bz66PYo.jpg",
       price: 900000,
     },
     {
-      name: "Khach san thu 3",
+      name: "Phong thu 3",
       image: "https://i.imgur.com/S5VOZNm.jpg",
       price: 1000000,
     },
     {
-      name: "Khach san thu 4",
+      name: "Phong thu 4",
       image: "https://i.imgur.com/IZSMJvT.jpg",
       price: 1200000,
     },
     {
-      name: "Khach san thu 5",
+      name: "Phong thu 5",
       image: "https://i.imgur.com/1MdWiBF.jpg",
       price: 1250000,
     },
     {
-      name: "Khach san thu 6",
+      name: "Phong thu 6",
       image: "https://i.imgur.com/M9Q7bzz.jpg",
       price: 690000,
     },
     {
-      name: "Khach san thu 7",
+      name: "Phong thu 7",
       image: "https://i.imgur.com/xFNYwtT.jpg",
       price: 1300000,
     },
     {
-      name: "Khach san thu 8",
+      name: "Phong thu 8",
       image: "https://i.imgur.com/lQY3Ma9.jpg",
       price: 1000000000,
     },
@@ -76,8 +76,8 @@ export default function Detail({ route, navigation }) {
     name,
     image,
     star,
-    rating,
-    pos,
+    score,
+    address,
     price,
     numOfReviews,
   } = route.params.item;
@@ -89,7 +89,7 @@ export default function Detail({ route, navigation }) {
           <Image
             resizeMode="cover"
             style={styles.image}
-            source={{ uri: "https://i.imgur.com/8L4AiK9.jpg" }}
+            source={{ uri: image }}
           />
         </View>
         <View style={styles.card}>
@@ -103,12 +103,12 @@ export default function Detail({ route, navigation }) {
         <View style={styles.mainContainer}>
           <View style={styles.content}>
             <Text style={styles.label}>Đánh giá và xếp hạng</Text>
-            <View style={styles.ratingContainer}>
-              <View style={styles.ratingLeft}>
-                <Text style={styles.ratingText}>{rating}</Text>
+            <View style={styles.scoreContainer}>
+              <View style={styles.scoreLeft}>
+                <Text style={styles.scoreText}>{score / 10}</Text>
               </View>
-              <View style={styles.ratingRight}>
-                <Text style={styles.ratingRes}>{rateFromNum(rating)}</Text>
+              <View style={styles.scoreRight}>
+                <Text style={styles.scoreRes}>{rateFromNum(score)}</Text>
                 <Text style={styles.reviews}>{numOfReviews} reviews</Text>
               </View>
             </View>
@@ -127,11 +127,11 @@ export default function Detail({ route, navigation }) {
                     name="wifi"
                     color="#ff383b"
                   />
-                  <MaterialCommunityIcons
+                  {/* <MaterialCommunityIcons
                     size={25}
                     name="wifi-off"
                     color="#ff383b"
-                  />
+                  /> */}
                   <Text>wifi</Text>
                 </View>
 
@@ -141,25 +141,20 @@ export default function Detail({ route, navigation }) {
                     name="coffee"
                     color="#ff383b"
                   />
-                  <MaterialCommunityIcons
+                  {/* <MaterialCommunityIcons
                     size={25}
                     name="coffee-off"
                     color="#ff383b"
-                  />
+                  /> */}
                   <Text>coffee</Text>
                 </View>
                 <View style={styles.service}>
                   <MaterialCommunityIcons
                     size={25}
-                    name="paw"
+                    name="food"
                     color="#ff383b"
                   />
-                  <MaterialCommunityIcons
-                    size={25}
-                    name="paw-off"
-                    color="#ff383b"
-                  />
-                  <Text>paw</Text>
+                  <Text>breakfast</Text>
                 </View>
                 <View style={styles.service}>
                   <MaterialCommunityIcons
@@ -168,6 +163,19 @@ export default function Detail({ route, navigation }) {
                     color="#ff383b"
                   />
                   <Text>pool</Text>
+                </View>
+                <View style={styles.service}>
+                  {/* <MaterialCommunityIcons
+                    size={25}
+                    name="paw"
+                    color="#ff383b"
+                  /> */}
+                  <MaterialCommunityIcons
+                    size={25}
+                    name="paw-off"
+                    color="#ff383b"
+                  />
+                  <Text>paw</Text>
                 </View>
               </ScrollView>
             </View>
@@ -181,7 +189,7 @@ export default function Detail({ route, navigation }) {
                 color="#ff383b"
                 size={20}
               />
-              <Text style={styles.locationText}>{pos}</Text>
+              <Text style={styles.locationText}>{address}</Text>
             </View>
           </View>
           <View style={styles.content}>
@@ -233,14 +241,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     padding: 20,
     margin: 20,
-    marginTop: -36,
+    marginTop: -50,
     borderRadius: 6,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 3.5,
     // elevation : 5,
-    height: 110,
+    height: 150,
     justifyContent: "space-around",
     alignItems: "center",
     paddingVertical: 20,
@@ -255,6 +263,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: "bold",
     textAlign: "center",
+    color: "#cc3377",
   },
   star: {
     flexDirection: "row",
@@ -262,15 +271,16 @@ const styles = StyleSheet.create({
   description: {
     color: "#555",
     textAlign: "center",
+    marginTop: 5,
   },
-  ratingContainer: {
+  scoreContainer: {
     // height: 80,
     flexDirection: "row",
     justifyContent: "flex-start",
     alignContent: "center",
   },
-  rating: {},
-  ratingLeft: {
+  score: {},
+  scoreLeft: {
     backgroundColor: "#FF383B",
     height: 50,
     width: 50,
@@ -279,17 +289,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  ratingRight: {
+  scoreRight: {
     height: 50,
     justifyContent: "space-around",
     alignContent: "center",
     marginLeft: 20,
   },
-  ratingText: {
+  scoreText: {
     color: "#fff",
     fontSize: 15,
   },
-  ratingRes: {
+  scoreRes: {
     fontSize: 16,
     fontWeight: "600",
     color: "#FF383B",
@@ -299,10 +309,14 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   descriptionContainer: {},
-  services: {},
+  services: {
+    marginTop: 5,
+  },
   service: {
     // flex: 0.25,
-    marginRight: 100,
+    marginRight: 50,
+    justifyContent: "center",
+    alignItems: "center",
   },
   featureContainer: {},
   locationContainer: {
@@ -312,6 +326,7 @@ const styles = StyleSheet.create({
   locationText: {
     fontSize: 18,
     fontWeight: "500",
+    color: "#4477AA",
   },
   timeContainer: {
     flexDirection: "row",
@@ -329,6 +344,8 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: "#666",
   },
-  roomContainer: {},
+  roomContainer: {
+    margin: 0,
+  },
   rooms: {},
 });

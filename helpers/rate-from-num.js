@@ -1,7 +1,7 @@
 export default function rateFromNum(num) {
-  if (num < 4) return "Bad";
-  else if (num >= 4 && num < 6) return "So so";
-  else if (num >= 6 && num < 8) return "Good";
-  else if (num >= 8 && num < 9) return "Excellent";
-  else if (num >= 9 && num <= 10) return "Perfect";
+  if (num / 10 < 4) return "Tệ";
+  else if (num / 10 >= 4 && num / 10 < 6) return "Bình Thường";
+  else if (num / 10 >= 6 && num / 10 < 8) return "Tốt";
+  else if (num / 10 >= 8 && num / 10 < 9) return "Xuất sắc";
+  else if (num / 10 >= 9 && num / 10 <= 10) return "Trên cả xuất sắc";
 }

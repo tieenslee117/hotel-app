@@ -1,5 +1,5 @@
 import * as Facebook from "expo-facebook";
-import { appId } from "../config/key";
+import { APP_ID } from "../constants/key";
 import { Alert } from "react-native";
 import { auth } from "../config/firebase";
 export const login = () => {
@@ -20,7 +20,7 @@ export const forgetPassword = () => {
 export const fbLogin = async () => {
   try {
     await Facebook.initializeAsync({
-      appId: appId,
+      appId: APP_ID,
     });
     const {
       type,
