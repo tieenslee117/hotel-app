@@ -1,14 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TextInput, Button } from "react-native";
+import { View, Text, StyleSheet, TextInput } from "react-native";
+import { Button } from "react-native-elements";
 import { Picker } from "@react-native-community/picker";
-// import { Button } from "react-native-elements";
+import { BaseColor } from "../../configs/theme";
+import { DefaultFont } from "../../configs/theme";
+import { AppLoading } from "expo";
+
+import { useFonts, Raleway_400Regular } from "@expo-google-fonts/raleway";
 
 import { getHotelsByLocation, getHotelsByName } from "../../api/hotel-details";
 import { getPrice } from "../../api/price.js";
 export default function SearchArea({ navigation }) {
   const [option, setOption] = useState("location");
   const [input, setInput] = useState("");
-  return (
+  let [fontsLoaded] = useFonts({
+    Raleway_400Regular,
+  });
+  return !fontsLoaded ? (
+    <AppLoading />
+  ) : (
     <View style={styles.container}>
       <View style={styles.searchBar}>
         <TextInput
@@ -29,7 +39,7 @@ export default function SearchArea({ navigation }) {
         </View>
       </View>
       <Button
-        color="#FF383B"
+        buttonStyle={styles.button}
         title="Search"
         onPress={() => {
           if (option === "location") {
@@ -46,6 +56,7 @@ export default function SearchArea({ navigation }) {
 }
 const styles = StyleSheet.create({
   container: {
+    fontFamily: DefaultFont,
     backgroundColor: "#fff",
     padding: 20,
     margin: 20,
@@ -54,7 +65,7 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
-    shadowRadius: 3.5,
+    shadowRadius: 2,
     // elevation : 5,
     height: 170,
   },
@@ -73,13 +84,6 @@ const styles = StyleSheet.create({
   },
   searchPicker: {
     display: "none",
-    // flex: 0.25,
-    // height: 40,
-    // // width: 100,
-    // backgroundColor: "#eee",
-    // borderWidth: 0,
-    // // borderLeftWidth : 1
-    // // paddingLeft: 15,
   },
   searchIcon: {
     padding: 10,
@@ -93,5 +97,14 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     marginTop: 15,
     padding: 10,
+  },
+  button: {
+    height: 45,
+    marginTop: 5,
+    marginBottom: 15,
+    // margin: 30,
+    color: "#fff",
+    // backgroundColor: "transparent",
+    backgroundColor: BaseColor.orangeColor,
   },
 });

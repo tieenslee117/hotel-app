@@ -8,6 +8,7 @@ import {
   Image,
 } from "react-native";
 // import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { DefaultFont } from "../configs/theme";
 
 import formatPrice from "../helpers/format-price";
 // import rateFromNum from "../helpers/rate-from-num";
@@ -49,6 +50,7 @@ export default function ListRoom({ list, navigation }) {
 
 const styles = StyleSheet.create({
   container: {
+    fontFamily: DefaultFont,
     backgroundColor: "#fff",
   },
   card: {

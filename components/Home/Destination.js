@@ -6,6 +6,7 @@ import {
   Text,
   StyleSheet,
 } from "react-native";
+import { DefaultFont } from "../../configs/theme";
 
 export default function Destination({ item }) {
   return (
@@ -22,6 +23,7 @@ export default function Destination({ item }) {
 }
 const styles = StyleSheet.create({
   container: {
+    fontFamily: DefaultFont,
     backgroundColor: "#444",
     borderRadius: 10,
   },

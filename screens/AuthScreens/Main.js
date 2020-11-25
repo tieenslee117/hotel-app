@@ -10,9 +10,10 @@ import {
   Alert,
   KeyboardAvoidingView,
   StyleSheet,
-  AsyncStorage,
 } from "react-native";
 import { Button } from "react-native-elements";
+import { DefaultFont } from "../../configs/theme";
+
 import Login from "./Login";
 import { fbLogin } from "../../controllers/auth.js";
 export default function Main({ navigation }) {
@@ -26,7 +27,6 @@ export default function Main({ navigation }) {
               buttonStyle={styles.fbLoginButton}
               onPress={() => fbLogin()}
               title="Login with Facebook"
-              // color="#3897f1"
             />
             <Button
               buttonStyle={styles.loginButton}
@@ -57,6 +57,8 @@ export default function Main({ navigation }) {
 const styles = StyleSheet.create({
   containerView: {
     flex: 1,
+    fontFamily: DefaultFont,
+
     // backgroundColor: "#3456",
   },
   loginScreenContainer: {

@@ -1,31 +1,39 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, LogBox } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 // import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import HomeScreen from "./screens/BottomTabs/Home";
 import FavoriteScreen from "./screens/BottomTabs/Favorite";
 import MoreScreen from "./screens/BottomTabs/More";
-
+import { BaseColor } from "./configs/theme";
 import AuthScreen from "./screens/AuthScreens/Auth";
 
 const Tab = createBottomTabNavigator();
 
 // import auth from "@react-native-firebase/auth";
-
+LogBox.ignoreAllLogs();
 export default function App() {
   // const [initializing, setInitializing] = useState(true);
-  // const [user, setUser] = useState();
+  const [user, setUser] = useState();
 
-  // const onAuthStateChanged = (user) => {
-  //   setUser(user);
-  //   if (initializing) setInitializing(false);
-  // };
-
-  // useEffect(() => {});
+  const onAuthStateChanged = (user) => {
+    setUser(user);
+    // if (initializing) setInitializing(false);
+  };
+  async function readUser() {
+    const user = await AsyncStorage.getItem("user");
+    if (user) {
+      setUser(JSON.parse(user));
+    }
+  }
+  useEffect(() => {
+    readUser();
+  });
 
   const screenOptions = ({ route }) => ({
     tabBarIcon: ({ focused, color, size }) => {
@@ -44,7 +52,7 @@ export default function App() {
   });
 
   const tabBarOptions = {
-    activeTintColor: "#FF383B",
+    activeTintColor: BaseColor.orangeColor,
     inactiveTintColor: "gray",
   };
   return (
@@ -53,7 +61,6 @@ export default function App() {
         screenOptions={screenOptions}
         tabBarOptions={tabBarOptions}
       >
-        <Tab.Screen component={AuthScreen} name="Auth" />
         <Tab.Screen component={HomeScreen} name="Home" />
         <Tab.Screen component={FavoriteScreen} name="Favorite" />
         <Tab.Screen component={MoreScreen} name="More" />

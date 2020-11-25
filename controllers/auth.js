@@ -1,49 +1,120 @@
 import * as Facebook from "expo-facebook";
-import { APP_ID } from "../constants/key";
+import { APP_ID } from "../configs/key";
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { auth } from "../config/firebase";
-export const login = () => {
-  //TODO : LOGIN LOGIC
-  console.log("you login!");
+import firebase from "../configs/firebase";
+
+// export const anonymousLogin = (navigation) => {
+//   Alert.alert("you login anonymous");
+// };
+import { updateAuthedUser } from "../models/auth.js";
+
+export const register = async (userInput) => {
+  for (let key in userInput) {
+    if (userInput[key].length === 0) {
+      throw new Error(`${key} can't be empty!`);
+    }
+    if (userInput.password !== userInput.password2) {
+      throw new Error(`Password not matched`);
+    }
+  }
+  await firebase
+    .auth()
+    .createUserWithEmailAndPassword(userInput.email, userInput.password);
+  firebase.auth().currentUser.sendEmailVerification();
+  return true;
 };
 
-export const register = () => {
-  //TODO : LOGIN LOGIC
-  console.log("you register!");
+export const login = async (userInput) => {
+  if (userInput.email.length === 0 || userInput.password === 0) {
+    throw new Error("Email and password cannot be empty!");
+  }
+  const loginResult = await firebase
+    .auth()
+    .signInWithEmailAndPassword(userInput.email, userInput.password);
+  if (!loginResult.user.emailVerified) {
+    throw new Error("User is not verified! Please check your inbox!");
+  }
+  updateAuthedUser(loginResult.user.email);
+  return true;
 };
 
-export const forgetPassword = () => {
-  //TODO : FORGET PASSWORD
-  console.log("you forget password :) !");
+export const logOut = () => {
+  firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      console.log(firebase.auth().currentUser + "log out");
+    });
+};
+// export const loginAnonymously = () => {
+//   firebase
+//     .auth()
+//     .signInAnonymously()
+//     .then(() => {
+//       // Signed in..
+//     })
+//     .catch((error) => {
+//       const errorCode = error.code;
+//       const errorMessage = error.message;
+//       // ...
+//     });
+// };
+
+export const loginCustomToken = () => {
+  firebase
+    .auth()
+    .signInWithCustomToken()
+    .then(() => {});
 };
 
-export const fbLogin = async () => {
+export const fbLogin = async (navigation) => {
   try {
     await Facebook.initializeAsync({
       appId: APP_ID,
     });
-    const {
-      type,
-      token,
-      expirationDate,
-      permissions,
-      declinedPermissions,
-    } = await Facebook.logInWithReadPermissionsAsync({
-      permissions: ["public_profile"],
+    const { type, token } = await Facebook.logInWithReadPermissionsAsync({
+      permissions: ["public_profile", "email"],
     });
     if (type === "success") {
-      // Get the user's name using Facebook's Graph API
       const response = await fetch(
         `https://graph.facebook.com/me?access_token=${token}`
       );
-      console.log(await response.json());
+      const data = await response.json().then((data) => {
+        console.log(data);
+        return data;
+      });
+      const modifiedData = Object.values(data);
+      console.log(modifiedData[0], modifiedData[1]);
+      AsyncStorage.setItem("@token", token);
+      AsyncStorage.setItem("name", modifiedData[0]);
+      AsyncStorage.setItem(
+        "avatar",
+        `http://graph.facebook.com/${modifiedData[1]}/picture?type=normal`
+      );
 
-      Alert.alert("Logged in!", `Hi ${await response.json()}!`);
+      const usersRef = firebase.firestore().collection("users").doc("userId");
+
+      usersRef.get().then((docSnapshot) => {
+        if (docSnapshot.exists) {
+          usersRef.onSnapshot((doc) => {
+            // do stuff with the data
+          });
+        } else {
+          usersRef.set({
+            name: modifiedData[0],
+            userId: modifiedData[1],
+          }); // create the document
+        }
+      });
+
+      navigation.navigate("User", {
+        // avatar: `http://graph.facebook.com/"+${data.id}+"/picture?type=small`,
+        // name: data.name,
+      });
     } else {
       type === "cancel";
     }
-    AsyncStorage.setItem("@token", token);
   } catch ({ message }) {
     alert(`Facebook Login Error: ${message}`);
   }

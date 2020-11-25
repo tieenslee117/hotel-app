@@ -12,6 +12,7 @@ import {
   AsyncStorage,
 } from "react-native";
 import { Button } from "react-native-elements";
+import { DefaultFont } from "../../configs/theme";
 
 import { register } from "../../controllers/auth";
 
@@ -60,6 +61,8 @@ export default function Login() {
 const styles = StyleSheet.create({
   containerView: {
     flex: 1,
+    fontFamily: DefaultFont,
+
     // backgroundColor: "#3456",
   },
   loginScreenContainer: {

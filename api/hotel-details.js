@@ -1,5 +1,5 @@
 //TODO: location search request
-import { IN4_API_URL } from "../constants/key.js";
+import { IN4_API_URL } from "../configs/key.js";
 import { getPrice } from "./price.js";
 
 /**

@@ -1,77 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import Auth from "../AuthScreens/Auth";
+import { createStackNavigator } from "@react-navigation/stack";
+import { DefaultFont } from "../../configs/theme";
+
+// import { getInformation } from "../../controllers/auth";
+
+import Login from "../Login";
+import Loading from "../Loading";
+import User from "../User";
+
+const Stack = createStackNavigator();
 
 export default function More({ navigation }) {
-  const isLogined = false;
-
-  return isLogined ? (
-    <View style={styles.container}>
-      <View style={styles.navBar}>
-        {/* <Text style={styles.title}> Profile </Text> */}
-        <MaterialCommunityIcons
-          style={styles.icon}
-          name="message-outline"
-          color="##FF383B"
-          size={35}
-        />
-        <Ionicons
-          style={styles.icon}
-          name="ios-notifications"
-          color="##FF383B"
-          size={35}
-        />
-      </View>
-      <ScrollView>
-        <View style={styles.userInfo}>
-          <View style={styles.info}>
-            <View>
-              <FontAwesome5 name="user-circle" size={40} color="##FF383B" />
-            </View>
-            <View style={styles.textInfo}>
-              <Text style={styles.name}>Tien Le</Text>
-              <Text style={styles.pos}>Hoan Kiem, Ha Noi, Viet Nam</Text>
-            </View>
-          </View>
-          <View style={styles.logout}>
-            {/* <Text>Logout</Text> */}
-            <MaterialCommunityIcons name="logout" size={40} color="#FF383B" />
-          </View>
-        </View>
-        <View style={styles.fields}>
-          <Text style={styles.text}>Edit Profile</Text>
-          <MaterialIcons name="navigate-next" size={30} color="#FF383B" />
-        </View>
-        <View style={styles.fields}>
-          <Text style={styles.text}>Change Password</Text>
-          <MaterialIcons name="navigate-next" size={30} color="#FF383B" />
-        </View>
-        <View style={styles.fields}>
-          <Text style={styles.text}>Language</Text>
-          <View style={styles.right}>
-            <Text style={styles.text}>English</Text>
-            <MaterialIcons name="navigate-next" size={30} color="#FF383B" />
-          </View>
-        </View>
-        <View style={styles.fields}>
-          <Text style={styles.text}>Currency</Text>
-          <View style={styles.right}>
-            <Text style={styles.text}>VND</Text>
-            <MaterialIcons name="navigate-next" size={30} color="#FF383B" />
-          </View>
-        </View>
-      </ScrollView>
-    </View>
-  ) : (
-    <View>
-      <Auth navigation={navigation} />
-    </View>
+  return (
+    <Stack.Navigator headerMode="none" initialRouteName="Login">
+      {/* <Stack.Screen component={Loading} name="Loading" /> */}
+      <Stack.Screen component={Login} name="Login" />
+      <Stack.Screen component={User} name="User" />
+    </Stack.Navigator>
   );
 }
 const styles = StyleSheet.create({

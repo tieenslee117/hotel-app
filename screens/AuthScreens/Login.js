@@ -13,11 +13,12 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Button } from "react-native-elements";
+import { DefaultFont } from "../../configs/theme";
 
 import { login } from "../../controllers/auth.js";
 // import { TouchableHighlight } from "react-native-gesture-handler";
 
-import { forgetPassword } from "../../controllers/auth.js";
+// import { forgetPassword } from "../../controllers/auth.js";
 // import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function Login() {
@@ -57,6 +58,7 @@ export default function Login() {
 const styles = StyleSheet.create({
   containerView: {
     flex: 1,
+    fontFamily: DefaultFont,
     // backgroundColor: "#3456",
   },
   loginScreenContainer: {

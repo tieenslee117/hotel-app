@@ -12,8 +12,12 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import SearchArea from "../../components/Home/SearchArea";
 import SlideDestinations from "../../components/Home/SlideDestinations";
+import { BaseColor } from "../../configs/theme";
 
 const HomeStack = createStackNavigator();
+
+// import { BaseColor, Typography, FontWeight } from "@config";
+import { DefaultFont } from "../../configs/theme";
 
 export default function Init({ navigation }) {
   return (
@@ -23,7 +27,10 @@ export default function Init({ navigation }) {
           <Image
             resizeMode="cover"
             style={styles.imageBackground}
-            source={{ uri: "https://i.imgur.com/8L4AiK9.jpg" }}
+            source={{
+              uri:
+                "https://media.architecturaldigest.com/photos/5a0476b03043ef0ce17b915f/master/w_1600%2Cc_limit/Louisiana%2520-%2520Courtesy%2520of%2520Hotel.jpg",
+            }}
           />
         </View>
         <View style={styles.search}>
@@ -38,6 +45,8 @@ export default function Init({ navigation }) {
 }
 const styles = StyleSheet.create({
   container: {
+    fontFamily: DefaultFont,
+    backgroundColor: BaseColor.whiteColor,
     // flex: 1,
     // marginTop: Constants.statusBarHeight,
   },
@@ -47,10 +56,10 @@ const styles = StyleSheet.create({
   },
   background: {},
   imageBackground: {
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
+    // borderBottomLeftRadius: 10,
+    // borderBottomRightRadius: 10,
     width: "100%",
-    height: 200,
+    height: 180,
   },
   slideArea: {
     marginTop: 20,

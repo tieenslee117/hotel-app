@@ -8,6 +8,7 @@ import {
   FlatList,
   TouchableHighlight,
 } from "react-native";
+import { DefaultFont } from "../../configs/theme";
 
 import Destination from "./Destination";
 export default function SlideDestinations() {
@@ -67,6 +68,7 @@ export default function SlideDestinations() {
 
 const styles = StyleSheet.create({
   container: {
+    fontFamily: DefaultFont,
     backgroundColor: "#fff",
     // padding: 20,
     // margin: 20,

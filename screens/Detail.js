@@ -4,8 +4,30 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 // import showStar from "../helpers/show-star";
 import rateFromNum from "../helpers/rate-from-num";
 import formatPrice from "../helpers/format-price";
-
+import { BaseColor } from "../configs/theme";
 import ListRoom from "../components/ListRoom";
+
+import * as Progress from "react-native-progress";
+
+function ScoreBar({ nameScore, score }) {
+  return (
+    <View style={styles.scoreBar}>
+      <Text style={styles.barLabel}>{nameScore}</Text>
+      <View style={styles.barContainer}>
+        <Progress.Bar
+          progress={score / 10}
+          // width={200}
+          borderRadius={10}
+          unfilledColor="#dedede"
+          height={17}
+          color={BaseColor.gbColor}
+          borderWidth={0}
+        />
+        <Text style={styles.scoreBarText}>{score}</Text>
+      </View>
+    </View>
+  );
+}
 
 export default function Detail({ route, navigation }) {
   const [listRoom, setListRoom] = useState([]);
@@ -56,7 +78,12 @@ export default function Detail({ route, navigation }) {
     let i = 0;
     for (; i < Math.floor(n); i++) {
       stars.push(
-        <MaterialCommunityIcons key={i} name="star" color="#ffdd10" size={20} />
+        <MaterialCommunityIcons
+          key={i}
+          name="star"
+          color={BaseColor.yellowColor}
+          size={20}
+        />
       );
     }
     if (Math.round(n) != n) {
@@ -64,7 +91,7 @@ export default function Detail({ route, navigation }) {
         <MaterialCommunityIcons
           key={i}
           name="star-half"
-          color="#ffdd10"
+          color={BaseColor.yellowColor}
           size={20}
         />
       );
@@ -109,7 +136,17 @@ export default function Detail({ route, navigation }) {
               </View>
               <View style={styles.scoreRight}>
                 <Text style={styles.scoreRes}>{rateFromNum(score)}</Text>
-                <Text style={styles.reviews}>{numOfReviews} reviews</Text>
+                <Text style={styles.reviews}>See {numOfReviews} reviews</Text>
+              </View>
+            </View>
+            <View style={styles.anotherScore}>
+              <View style={styles.anotherScoreLeft}>
+                <ScoreBar nameScore="Chất lượng phục vụ" score={7} />
+                <ScoreBar nameScore="Vệ sinh" score={8} />
+              </View>
+              <View style={styles.anotherScoreRight}>
+                <ScoreBar nameScore="Đồ ăn" score={7} />
+                <ScoreBar nameScore="Thiết kế" score={9} />
               </View>
             </View>
           </View>
@@ -125,12 +162,12 @@ export default function Detail({ route, navigation }) {
                   <MaterialCommunityIcons
                     size={25}
                     name="wifi"
-                    color="#ff383b"
+                    color={BaseColor.gbColor}
                   />
                   {/* <MaterialCommunityIcons
                     size={25}
                     name="wifi-off"
-                    color="#ff383b"
+                    color={BaseColor.orangeColor}
                   /> */}
                   <Text>wifi</Text>
                 </View>
@@ -139,12 +176,12 @@ export default function Detail({ route, navigation }) {
                   <MaterialCommunityIcons
                     size={25}
                     name="coffee"
-                    color="#ff383b"
+                    color={BaseColor.gbColor}
                   />
                   {/* <MaterialCommunityIcons
                     size={25}
                     name="coffee-off"
-                    color="#ff383b"
+                    color={BaseColor.orangeColor}
                   /> */}
                   <Text>coffee</Text>
                 </View>
@@ -152,7 +189,7 @@ export default function Detail({ route, navigation }) {
                   <MaterialCommunityIcons
                     size={25}
                     name="food"
-                    color="#ff383b"
+                    color={BaseColor.gbColor}
                   />
                   <Text>breakfast</Text>
                 </View>
@@ -160,7 +197,7 @@ export default function Detail({ route, navigation }) {
                   <MaterialCommunityIcons
                     size={25}
                     name="swim"
-                    color="#ff383b"
+                    color={BaseColor.gbColor}
                   />
                   <Text>pool</Text>
                 </View>
@@ -168,12 +205,12 @@ export default function Detail({ route, navigation }) {
                   {/* <MaterialCommunityIcons
                     size={25}
                     name="paw"
-                    color="#ff383b"
+                    color={BaseColor.gbColor}
                   /> */}
                   <MaterialCommunityIcons
                     size={25}
                     name="paw-off"
-                    color="#ff383b"
+                    color={BaseColor.gbColor}
                   />
                   <Text>paw</Text>
                 </View>
@@ -186,7 +223,7 @@ export default function Detail({ route, navigation }) {
             <View style={styles.locationContainer}>
               <MaterialCommunityIcons
                 name="map-marker"
-                color="#ff383b"
+                color={BaseColor.orangeColor}
                 size={20}
               />
               <Text style={styles.locationText}>{address}</Text>
@@ -235,7 +272,7 @@ const styles = StyleSheet.create({
   imageContainer: {},
   image: {
     width: "100%",
-    height: 250,
+    height: 190,
   },
   card: {
     backgroundColor: "#fff",
@@ -248,22 +285,21 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 3.5,
     // elevation : 5,
-    height: 150,
+    height: 130,
     justifyContent: "space-around",
     alignItems: "center",
-    paddingVertical: 20,
+    paddingVertical: 15,
     paddingHorizontal: 20,
   },
   label: {
     marginBottom: 10,
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: "400",
   },
   name: {
-    fontSize: 25,
-    fontWeight: "bold",
+    fontSize: 24,
+    fontWeight: "500",
     textAlign: "center",
-    color: "#cc3377",
   },
   star: {
     flexDirection: "row",
@@ -281,9 +317,9 @@ const styles = StyleSheet.create({
   },
   score: {},
   scoreLeft: {
-    backgroundColor: "#FF383B",
-    height: 50,
-    width: 50,
+    backgroundColor: BaseColor.orangeColor,
+    height: 60,
+    width: 60,
     borderRadius: 50,
     textAlign: "center",
     justifyContent: "center",
@@ -291,23 +327,57 @@ const styles = StyleSheet.create({
   },
   scoreRight: {
     height: 50,
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     alignContent: "center",
-    marginLeft: 20,
+    marginLeft: 18,
   },
   scoreText: {
     color: "#fff",
-    fontSize: 15,
+    fontSize: 18,
+    fontWeight: "500",
   },
   scoreRes: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "600",
-    color: "#FF383B",
+    color: BaseColor.orangeColor,
   },
   reviews: {
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: "300",
+    color: BaseColor.grayColor,
   },
+
+  anotherScore: {
+    flexDirection: "row",
+    marginTop: 15,
+    justifyContent: "space-between",
+  },
+  anotherScoreLeft: {
+    // backgroundColor: "red",
+    flex: 0.48,
+  },
+
+  anotherScoreRight: {
+    flex: 0.48,
+  },
+
+  scoreBar: {
+    marginBottom: 15,
+  },
+  barContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
+  barLabel: {
+    fontSize: 14,
+    color: BaseColor.grayColor,
+    marginBottom: 5,
+  },
+  scoreBarText: {
+    fontSize: 13,
+    marginLeft: 5,
+  },
+
   descriptionContainer: {},
   services: {
     marginTop: 5,
