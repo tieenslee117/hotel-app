@@ -36,7 +36,11 @@ export default function RoomDetail({ route }) {
 
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.scrollView}>
+      <ScrollView
+        style={styles.scrollView}
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+      >
         <View style={styles.background}>
           <Image
             resizeMode="cover"
@@ -72,7 +76,12 @@ export default function RoomDetail({ route }) {
                 This is a description of hotel, it is very very very very very
                 very long
               </Text>
-              <ScrollView horizontal={true} style={styles.services}>
+              <ScrollView
+                horizontal={true}
+                style={styles.services}
+                showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}
+              >
                 <View style={styles.service}>
                   <MaterialCommunityIcons
                     size={25}

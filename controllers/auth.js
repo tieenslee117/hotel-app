@@ -3,6 +3,7 @@ import { APP_ID } from "../configs/key";
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import firebase from "../configs/firebase";
+import "firebase/firestore";
 
 // export const anonymousLogin = (navigation) => {
 //   Alert.alert("you login anonymous");
@@ -93,7 +94,7 @@ export const fbLogin = async (navigation) => {
         `http://graph.facebook.com/${modifiedData[1]}/picture?type=normal`
       );
 
-      const usersRef = firebase.firestore().collection("users").doc("userId");
+      const usersRef = firebase.firestore().collection("users").doc();
 
       usersRef.get().then((docSnapshot) => {
         if (docSnapshot.exists) {
@@ -104,27 +105,18 @@ export const fbLogin = async (navigation) => {
           usersRef.set({
             name: modifiedData[0],
             userId: modifiedData[1],
+            favorite: [],
           }); // create the document
         }
       });
 
-      navigation.navigate("User", {
-        // avatar: `http://graph.facebook.com/"+${data.id}+"/picture?type=small`,
-        // name: data.name,
-      });
+      navigation.navigate("User", {});
     } else {
       type === "cancel";
     }
   } catch ({ message }) {
     alert(`Facebook Login Error: ${message}`);
   }
-
-  // if (type === "success") {
-  //   const response = await fetch(
-  //     `https://graph.facebook.com/me?access_token=${token}`
-  //   );
-  //   Alert.alert("Logged in!", `Hi ${(await response.json()).name}!`);
-  // }
 };
 
 export const googleLogin = () => {

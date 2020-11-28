@@ -8,7 +8,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Auth from "../AuthScreens/Auth";
 import { createStackNavigator } from "@react-navigation/stack";
-import { DefaultFont } from "../../configs/theme";
+import { BaseColor, DefaultFont } from "../../configs/theme";
 
 // import { getInformation } from "../../controllers/auth";
 
@@ -20,10 +20,42 @@ const Stack = createStackNavigator();
 
 export default function More({ navigation }) {
   return (
-    <Stack.Navigator headerMode="none" initialRouteName="Login">
+    <Stack.Navigator initialRouteName="Login">
       {/* <Stack.Screen component={Loading} name="Loading" /> */}
-      <Stack.Screen component={Login} name="Login" />
-      <Stack.Screen component={User} name="User" />
+      <Stack.Screen
+        component={Login}
+        name="Login"
+        options={{
+          headerBackTitle: " ",
+          headerTitle: "Đăng nhập",
+          headerTintColor: BaseColor.orangeColor,
+          headerTitleStyle: {
+            fontWeight: "200",
+            fontSize: 22,
+            // color: "#000",
+          },
+          headerBackTitleStyle: {
+            fontSize: 16,
+          },
+        }}
+      />
+      <Stack.Screen
+        component={User}
+        name="User"
+        options={{
+          headerBackTitle: " ",
+          headerTitle: "Thông tin",
+          headerTintColor: BaseColor.orangeColor,
+          headerTitleStyle: {
+            fontWeight: "200",
+            fontSize: 22,
+            // color: "#000",
+          },
+          headerBackTitleStyle: {
+            fontSize: 16,
+          },
+        }}
+      />
     </Stack.Navigator>
   );
 }

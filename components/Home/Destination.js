@@ -2,6 +2,7 @@ import React from "react";
 import {
   View,
   TouchableHighlight,
+  TouchableOpacity,
   Image,
   Text,
   StyleSheet,
@@ -11,13 +12,13 @@ import { DefaultFont } from "../../configs/theme";
 export default function Destination({ item }) {
   return (
     <View style={styles.container}>
-      <TouchableHighlight onPress={() => console.log(item.title)}>
+      <TouchableOpacity onPress={() => console.log(item.title)}>
         <Image
           source={{ uri: "https://i.imgur.com/8L4AiK9.jpg" }}
           style={{ width: 200, height: 200 }}
         />
         <Text>{item.title}</Text>
-      </TouchableHighlight>
+      </TouchableOpacity>
     </View>
   );
 }

@@ -27,6 +27,7 @@ export default function Auth({ navigation }) {
 const styles = StyleSheet.create({
   containerView: {
     flex: 1,
+    
     // backgroundColor: "#3456",
   },
   loginScreenContainer: {

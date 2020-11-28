@@ -6,46 +6,84 @@ import {
   StyleSheet,
   TouchableHighlight,
   Image,
+  ActivityIndicator,
 } from "react-native";
 // import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { DefaultFont } from "../configs/theme";
+import { TOKEN } from "../configs/key";
+import { BaseColor } from "../configs/theme";
+function getToday() {
+  const today = new Date();
+  const date =
+    today.getFullYear() + "" + (today.getMonth() + 1) + "" + today.getDate();
 
-import formatPrice from "../helpers/format-price";
-// import rateFromNum from "../helpers/rate-from-num";
-export default function ListRoom({ list, navigation }) {
-  // const handleNavigateDetail = (item) => {
-  //   navigation.navigate("Detail", { item: item });
-  // };
-  return (
-    <View style={styles.container}>
-      <FlatList
-        data={list}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => (
-          <TouchableHighlight
-            onPress={() => {
-              console.log(item);
-              // handleNavigateDetail(item);
-            }}
-          >
-            <View style={styles.card}>
-              <View style={styles.imageContainer}>
-                <Image source={{ uri: item.image }} style={styles.image} />
-              </View>
-              <View style={styles.info}>
-                <View style={styles.infoTop}>
-                  <Text style={styles.name}>{item.name}</Text>
-                </View>
-                <View style={styles.infoBottom}>
-                  <Text style={styles.price}>{formatPrice(item.price)}đ</Text>
-                </View>
-              </View>
+  return date;
+}
+export class ListRoom extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: true,
+      list: [],
+    };
+  }
+  componentDidMount() {
+    const URL = "https://tripgle.data.tripi.vn/get_price";
+    const { domainId, hotelId } = this.props;
+    const today = getToday();
+    const data = `${domainId},${hotelId},${today}`;
+    const raw = JSON.stringify({ hotel_ids: data });
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Basic ${TOKEN}`);
+    // myHeaders.append("Access-Control-Allow-Origin", "*");
+    // myHeaders.append("Accept", "*/*");
+    myHeaders.append("Content-Type", "application/json");
+    const requestOptions = {
+      credentials: "include",
+      method: "POST",
+      headers: myHeaders,
+      // mode: "no-cors",
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch("https://tripgle.data.tripi.vn/get_price", requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        console.log(result);
+        this.setState({
+          list: result,
+          isLoading: false,
+        });
+      })
+      .catch((error) => console.log("error", error));
+  }
+  render() {
+    if (this.state.isLoading) {
+      return (
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <ActivityIndicator size="large" color={BaseColor.orangeColor} />
+        </View>
+      );
+    }
+    return (
+      <View>
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+          data={this.state.list}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => (
+            <View>
+              <Text>{item[0][0].room_type_name}</Text>
             </View>
-          </TouchableHighlight>
-        )}
-      />
-    </View>
-  );
+          )}
+        />
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

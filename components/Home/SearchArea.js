@@ -22,7 +22,7 @@ export default function SearchArea({ navigation }) {
     <View style={styles.container}>
       <View style={styles.searchBar}>
         <TextInput
-          placeholder="Nhập thông tin tìm kiếm"
+          placeholder="Nhập địa điểm hoặc tên khách sạn"
           style={styles.searchInput}
           onChangeText={(text) => setInput(text)}
         />
@@ -40,11 +40,11 @@ export default function SearchArea({ navigation }) {
       </View>
       <Button
         buttonStyle={styles.button}
-        title="Search"
+        title="Tìm kiếm"
         onPress={() => {
           if (option === "location") {
             // getHotelsByLocation(input);
-            navigation.navigate("List", { location: input });
+            navigation.navigate("List", { location: input, option: 1 });
           } else if (option === "hotelName") {
             // getHotelsByName(input);
             navigation.navigate("List", { name });

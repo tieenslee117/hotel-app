@@ -38,11 +38,11 @@ export default function App() {
   const screenOptions = ({ route }) => ({
     tabBarIcon: ({ focused, color, size }) => {
       let iconName;
-      if (route.name === "Home") {
+      if (route.name === "Trang chủ") {
         iconName = "ios-home";
-      } else if (route.name === "Favorite") {
+      } else if (route.name === "Yêu thích") {
         iconName = "ios-heart";
-      } else if (route.name === "More") {
+      } else if (route.name === "Thêm") {
         iconName = "ios-person";
       } else if (route.name === "Booking") {
         iconName = "ios-briefcase";
@@ -61,9 +61,9 @@ export default function App() {
         screenOptions={screenOptions}
         tabBarOptions={tabBarOptions}
       >
-        <Tab.Screen component={HomeScreen} name="Home" />
-        <Tab.Screen component={FavoriteScreen} name="Favorite" />
-        <Tab.Screen component={MoreScreen} name="More" />
+        <Tab.Screen component={HomeScreen} name="Trang chủ" />
+        <Tab.Screen component={FavoriteScreen} name="Yêu thích" />
+        <Tab.Screen component={MoreScreen} name="Thêm" />
       </Tab.Navigator>
     </NavigationContainer>
   );

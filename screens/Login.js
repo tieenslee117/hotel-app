@@ -13,7 +13,8 @@ import {
 } from "react-native";
 import { Portal, Dialog, Paragraph } from "react-native-paper";
 import { Button } from "react-native-elements";
-import { fbLogin, anonymousLogin } from "../controllers/auth";
+import { fbLogin } from "../controllers/auth";
+import { BaseColor } from "../configs/theme";
 export default function Login({ navigation }) {
   const [visible, setVisible] = useState(false);
   const [input, setInput] = useState("");
@@ -28,16 +29,16 @@ export default function Login({ navigation }) {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.loginScreenContainer}>
           <View style={styles.loginFormView}>
-            <Text style={styles.logoText}>Welcome</Text>
+            <Text style={styles.logoText}>Tham gia cùng chúng tôi</Text>
             <Button
               buttonStyle={styles.fbLoginButton}
               onPress={() => fbLogin(navigation)}
-              title="Login with Facebook"
+              title="Đăng nhập với facebook"
             />
-            <Button
+            {/* <Button
               buttonStyle={styles.loginButton}
               onPress={() => showDialog()}
-              title="Anonymous"
+              title="Ẩn danh"
             />
             <View>
               <Portal>
@@ -55,7 +56,7 @@ export default function Login({ navigation }) {
                   </Dialog.Actions>
                 </Dialog>
               </Portal>
-            </View>
+            </View> */}
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -66,17 +67,19 @@ export default function Login({ navigation }) {
 const styles = StyleSheet.create({
   containerView: {
     flex: 1,
-    // backgroundColor: "#3456",
   },
   loginScreenContainer: {
     flex: 1,
+    justifyContent: "center",
+    // alignItems: "center",
   },
   logoText: {
     fontSize: 40,
     fontWeight: "800",
-    marginTop: 150,
+    marginTop: 120,
     marginBottom: 30,
     textAlign: "center",
+    // color: BaseColor.grayColor,
   },
   loginFormView: {
     flex: 1,

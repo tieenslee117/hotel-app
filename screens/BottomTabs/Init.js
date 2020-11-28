@@ -11,7 +11,9 @@ import {
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import SearchArea from "../../components/Home/SearchArea";
-import SlideDestinations from "../../components/Home/SlideDestinations";
+import { SlideDestinations } from "../../components/Home/SlideDestinations";
+import { SlideHotels } from "../../components/Home/SlideHotels";
+
 import { BaseColor } from "../../configs/theme";
 
 const HomeStack = createStackNavigator();
@@ -22,7 +24,11 @@ import { DefaultFont } from "../../configs/theme";
 export default function Init({ navigation }) {
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.scrollView}>
+      <ScrollView
+        style={styles.scrollView}
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+      >
         <View style={styles.background}>
           <Image
             resizeMode="cover"
@@ -36,9 +42,13 @@ export default function Init({ navigation }) {
         <View style={styles.search}>
           <SearchArea navigation={navigation} />
         </View>
+        <View></View>
         <View style={styles.slideArea}>
-          <SlideDestinations />
+          <SlideDestinations navigation={navigation} />
         </View>
+        {/* <View style={styles.slideArea}>
+          <SlideHotels navigation={navigation} />
+        </View> */}
       </ScrollView>
     </View>
   );
@@ -46,7 +56,7 @@ export default function Init({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     fontFamily: DefaultFont,
-    backgroundColor: BaseColor.whiteColor,
+    backgroundColor: BaseColor.grayColor2,
     // flex: 1,
     // marginTop: Constants.statusBarHeight,
   },
@@ -62,12 +72,13 @@ const styles = StyleSheet.create({
     height: 180,
   },
   slideArea: {
-    marginTop: 20,
+    marginBottom: 20,
+    // backgroundColor: "#fdd",
   },
   text: {
     fontSize: 50,
   },
   search: {
-    marginTop: -100,
+    marginTop: -80,
   },
 });

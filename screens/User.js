@@ -7,9 +7,9 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Button } from "react-native-elements";
-import UserAvatar from "react-native-user-avatar";
+// import UserAvatar from "react-native-user-avatar";
 // import { getInformation } from "../../controllers/auth";
-
+import { BaseColor } from "../configs/theme";
 export default class User extends Component {
   constructor(props) {
     super(props);
@@ -30,71 +30,78 @@ export default class User extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.navBar}>
+        {/* <View style={styles.navBar}>
           <MaterialCommunityIcons
             style={styles.icon}
             name="message-outline"
-            color="#FF383B"
+            color={BaseColor.orangeColor}
             size={35}
           />
           <Ionicons
             style={styles.icon}
             name="ios-notifications"
-            color="#FF383B"
+            color={BaseColor.orangeColor}
             size={35}
           />
-        </View>
-        <ScrollView>
+        </View> */}
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+        >
           <View style={styles.userInfo}>
             <View style={styles.info}>
               <View>
-                (avatar) ? (
+                {/* (avatar) ? ( */}
                 <Image
                   source={{ uri: this.state.avatar }}
                   style={{ width: 60, height: 60, borderRadius: 50 }}
                 />
-                ) : (
-                <UserAvatar size={60} name={this.state.name} />)
+                {/* ) : (
+                <UserAvatar size={60} name={this.state.name} />) */}
               </View>
               <View style={styles.textInfo}>
                 <Text style={styles.name}>{this.state.name}</Text>
-                <Text style={styles.pos}>Hoan Kiem, Ha Noi, Viet Nam</Text>
+                {/* <Text style={styles.pos}>Hoan Kiem, Ha Noi, Viet Nam</Text> */}
               </View>
             </View>
-            <View style={styles.logout}>
-              {/* <Text>Logout</Text> */}
-              <MaterialCommunityIcons name="logout" size={40} color="#FF383B" />
-            </View>
           </View>
           <View style={styles.fields}>
-            <Text style={styles.text}>Edit Profile</Text>
-            <MaterialIcons name="navigate-next" size={30} color="#FF383B" />
+            <Text style={styles.text}>Thông tin</Text>
+            <MaterialIcons
+              name="navigate-next"
+              size={25}
+              color={BaseColor.orangeColor}
+            />
           </View>
           <View style={styles.fields}>
-            <Text style={styles.text}>Change Password</Text>
-            <MaterialIcons name="navigate-next" size={30} color="#FF383B" />
-          </View>
-          <View style={styles.fields}>
-            <Text style={styles.text}>Language</Text>
+            <Text style={styles.text}>Ngôn ngữ</Text>
             <View style={styles.right}>
-              <Text style={styles.text}>English</Text>
-              <MaterialIcons name="navigate-next" size={30} color="#FF383B" />
+              <Text style={styles.text}>Tiếng việt</Text>
+              <MaterialIcons
+                name="navigate-next"
+                size={25}
+                color={BaseColor.orangeColor}
+              />
             </View>
           </View>
           <View style={styles.fields}>
-            <Text style={styles.text}>Currency</Text>
+            <Text style={styles.text}>Đơn vị tiền tệ</Text>
             <View style={styles.right}>
               <Text style={styles.text}>VND</Text>
-              <MaterialIcons name="navigate-next" size={30} color="#FF383B" />
+              <MaterialIcons
+                name="navigate-next"
+                size={25}
+                color={BaseColor.orangeColor}
+              />
             </View>
           </View>
           <Button
-            buttonStyle={styles.registerButton}
+            buttonStyle={styles.logoutButton}
             onPress={() => {
               AsyncStorage.removeItem("@token");
               this.props.navigation.navigate("Login");
             }}
-            title="Log out"
+            title="Đăng xuất"
           />
         </ScrollView>
       </View>
@@ -112,21 +119,22 @@ export default class User extends Component {
 //         <MaterialCommunityIcons
 //           style={styles.icon}
 //           name="message-outline"
-//           color="#FF383B"
+//           color={BaseColor.orangeColor}
 //           size={35}
 //         />
 //         <Ionicons
 //           style={styles.icon}
 //           name="ios-notifications"
-//           color="#FF383B"
+//           color={BaseColor.orangeColor}
 //           size={35}
 //         />
 //       </View>
-//       <ScrollView>
+//       <ScrollView showsVerticalScrollIndicator ={false}
+// showsHorizontalScrollIndicator={false}>
 //         <View style={styles.userInfo}>
 //           <View style={styles.info}>
 //             <View>
-//               <FontAwesome5 name="user-circle" size={40} color="#FF383B" />
+//               <FontAwesome5 name="user-circle" size={40} color={BaseColor.orangeColor} />
 //             </View>
 //             <View style={styles.textInfo}>
 //               <Text style={styles.name}>{name}</Text>
@@ -135,33 +143,33 @@ export default class User extends Component {
 //           </View>
 //           <View style={styles.logout}>
 //             {/* <Text>Logout</Text> */}
-//             <MaterialCommunityIcons name="logout" size={40} color="#FF383B" />
+//             <MaterialCommunityIcons name="logout" size={40} color={BaseColor.orangeColor} />
 //           </View>
 //         </View>
 //         <View style={styles.fields}>
 //           <Text style={styles.text}>Edit Profile</Text>
-//           <MaterialIcons name="navigate-next" size={30} color="#FF383B" />
+//           <MaterialIcons name="navigate-next" size={30} color={BaseColor.orangeColor} />
 //         </View>
 //         <View style={styles.fields}>
 //           <Text style={styles.text}>Change Password</Text>
-//           <MaterialIcons name="navigate-next" size={30} color="#FF383B" />
+//           <MaterialIcons name="navigate-next" size={30} color={BaseColor.orangeColor} />
 //         </View>
 //         <View style={styles.fields}>
 //           <Text style={styles.text}>Language</Text>
 //           <View style={styles.right}>
 //             <Text style={styles.text}>English</Text>
-//             <MaterialIcons name="navigate-next" size={30} color="#FF383B" />
+//             <MaterialIcons name="navigate-next" size={30} color={BaseColor.orangeColor} />
 //           </View>
 //         </View>
 //         <View style={styles.fields}>
 //           <Text style={styles.text}>Currency</Text>
 //           <View style={styles.right}>
 //             <Text style={styles.text}>VND</Text>
-//             <MaterialIcons name="navigate-next" size={30} color="#FF383B" />
+//             <MaterialIcons name="navigate-next" size={30} color={BaseColor.orangeColor} />
 //           </View>
 //         </View>
 //         <Button
-//           buttonStyle={styles.registerButton}
+//           buttonStyle={styles.logoutButton}
 //           onPress={() => {
 //             AsyncStorage.removeItem("@token");
 //             navigation.navigate("Login");
@@ -194,7 +202,7 @@ const styles = StyleSheet.create({
     margin: 10,
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: "#ddd",
+    backgroundColor: BaseColor.whiteColor,
     padding: 20,
     borderRadius: 10,
   },
@@ -220,8 +228,8 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingLeft: 10,
     paddingRight: 10,
-    borderBottomColor: "#222",
-    borderBottomWidth: 2,
+    borderBottomColor: BaseColor.dividerColor,
+    borderBottomWidth: 1,
     margin: 20,
     marginTop: 0,
   },
@@ -236,8 +244,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-  registerButton: {
-    backgroundColor: "rgb(100, 100, 100)",
+  logoutButton: {
+    backgroundColor: BaseColor.orangeColor,
     borderRadius: 5,
     height: 45,
     marginTop: 15,

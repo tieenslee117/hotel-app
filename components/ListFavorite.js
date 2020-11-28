@@ -28,10 +28,10 @@ import { useFonts, Raleway_400Regular } from "@expo-google-fonts/raleway";
 import { AppLoading } from "expo";
 import { FontWeight, Typography, FontSize } from "../configs/typography";
 
-export default function ListHotel({ list, navigation, location, opt }) {
+export default function ListFavorite({ list, navigation }) {
   const [key, setKey] = useState(0);
   const [listHotel, setListHotel] = useState([]);
-  const [option, setOption] = useState(opt);
+  const [option, setOption] = useState(1);
   useEffect(() => {}, []);
   const providers = {
     2: `traveloka`, //: 1000000153223
@@ -76,14 +76,6 @@ export default function ListHotel({ list, navigation, location, opt }) {
     // return <View>{/* {for(let i = 0)} */}</View>;
     return stars;
   };
-  const getToday = () => {
-    let today = new Date();
-    const dd = String(today.getDate()).padStart(2, "0");
-    const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-    const yyyy = today.getFullYear();
-
-    today = mm + "/" + dd + "/" + yyyy;
-  };
   const handleNavigateDetail = (item) => {
     console.log(normalizeName(item.name));
     navigation.navigate("Detail", { item: item });
@@ -94,57 +86,6 @@ export default function ListHotel({ list, navigation, location, opt }) {
   }
   return (
     <View style={styles.container}>
-      <View style={styles.filter}>
-        <View style={styles.basicFilter}>
-          <View style={styles.filterIcon}>
-            <FontAwesome5
-              name="sort-amount-up"
-              size={20}
-              color={BaseColor.grayColor}
-            />
-          </View>
-          <TouchableOpacity
-            onPress={() => {
-              if (option != 1) {
-                // setOption(1);
-                navigation.push("List", { location, option: 1 });
-              }
-            }}
-          >
-            <Text
-              style={[
-                styles.option,
-                option == 1 ? { backgroundColor: "#eee" } : {},
-              ]}
-            >
-              Phù hợp nhất
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              if (option != 2) {
-                // setOption(2);
-                navigation.push("List", { location, option: 2 });
-              }
-            }}
-          >
-            <Text
-              style={[
-                styles.option,
-                option == 2 ? { backgroundColor: "#eee" } : {},
-              ]}
-            >
-              Giá thấp nhất
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.advancedFilter}>
-          <View style={styles.filterIcon}>
-            <FontAwesome5 name="filter" size={20} color={BaseColor.grayColor} />
-          </View>
-          <Text style={styles.filterText}>Lọc</Text>
-        </View>
-      </View>
       <FlatList
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
@@ -196,7 +137,6 @@ export default function ListHotel({ list, navigation, location, opt }) {
                 <View style={styles.infoRight}>
                   <View style={styles.logoContainer}>
                     <Image
-                      // source={require(providers[item.providers[0]["provider"]])}
                       source={{
                         uri:
                           logos[
@@ -225,62 +165,9 @@ const styles = StyleSheet.create({
     fontFamily: "Raleway_400Regular",
     backgroundColor: "#fff",
     // flex: 1,
-    marginBottom: 100,
-  },
-  filter: {
-    // marginBottom: 18,
-    // marginTop: 18,
-    margin: 12,
-    flexDirection: "row",
-    justifyContent: "space-between",
-
-    // borderBottomWidth: 0.5,
-    // borderBottomColor: BaseColor.grayColor,
-  },
-  filterText: {
-    color: BaseColor.grayColor,
-    textAlign: "center",
-    fontWeight: "300",
-    fontSize: 18,
-  },
-  basicFilter: {
-    flexDirection: "row",
-    flex: 0.5,
-    color: BaseColor.grayColor,
-    alignItems: "center",
-  },
-  option: {
-    marginLeft: 10,
-    color: BaseColor.grayColor,
-    fontWeight: "300",
-    fontSize: 18,
-    borderRightColor: BaseColor.grayColor,
-    padding: 3,
-  },
-  option2: {
-    marginLeft: 10,
-    color: BaseColor.grayColor,
-    fontWeight: "300",
-    fontSize: 18,
-    borderLeftWidth: 0.5,
-    borderLeftColor: BaseColor.grayColor,
-    padding: 3,
-  },
-  filterIcon: {},
-  advancedFilter: {
-    color: BaseColor.grayColor,
-    flex: 0.22,
-    flexDirection: "row",
-    borderLeftWidth: 0.5,
-    borderLeftColor: BaseColor.grayColor,
-    // backgroundColor: "green",
-    justifyContent: "space-around",
-    alignItems: "center",
+    // marginBottom: 100,
   },
   hotel: {
-    // flex: 1,
-    // borderWidth: 1,
-    // borderColor: "#555",
     shadowColor: BaseColor.dividerColor,
     shadowOffset: { width: 0, height: 0 },
     // shadowOpacity: 1,
